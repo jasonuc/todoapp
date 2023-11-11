@@ -9,7 +9,7 @@ function TaskSection() {
 
   return (
     <div className="mt-4 w-[90%] md:w-3/4 flex flex-col items-center gap-y-4 ">
-        {tasks.map(({ id, text, dateTime }) => (<Task key={id} text={text} dateTime={dateTime} id={id} />))}
+        {tasks.map(({ id, task, datetime }) => (<Task key={id} id={id} task={task} datetime={datetime} />))}
     </div>
   )
 }
