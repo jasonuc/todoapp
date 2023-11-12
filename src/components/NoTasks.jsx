@@ -14,7 +14,7 @@ const NoTasks = () => {
         1000
       ]}
       wrapper="p" speed={80} deletionSpeed={95} repeat={Infinity} cursor={false}
-      className='text-third italic inline-block'
+      className='text-third inline-block font-semibold'
     />
   );
 };
