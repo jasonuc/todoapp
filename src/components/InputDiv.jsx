@@ -19,11 +19,16 @@ function InputDiv() {
   }
 
   const AddTask = () => {
-    setTasks(prev => ([
-      task,
-      ...prev
-    ]))
-    taskInputRef.current.value = ""
+    if (taskInputRef.current.value) {
+      setTasks(prev => ([
+        task,
+        ...prev
+      ]))
+      taskInputRef.current.value = ""
+      setTask(null)
+    } else {
+      console.warn("Type in a task before pressing the add button.")
+    }
   }
 
   return (
