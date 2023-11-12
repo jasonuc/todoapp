@@ -14,7 +14,7 @@ function GoogleAuth() {
         await signInWithPopup(auth, provider)
         navigate('/home')
     }
-    
+
     return (
         <AuthButton handleAuth={handleGoogleAuth}>
             <FcGoogle size={40} />

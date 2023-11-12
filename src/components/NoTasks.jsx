@@ -2,10 +2,10 @@ import { TypeAnimation } from 'react-type-animation';
 
 const NoTasks = () => {
   return (
-    <TypeAnimation 
+    <TypeAnimation
       sequence={[
         '😴 you have no tasks to complete',
-        1000, 
+        1000,
         '😴 you have no tasks to complete.',
         1000,
         '😴 you have no tasks to complete..',
