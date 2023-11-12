@@ -7,7 +7,7 @@ import NotFound from "./components/NotFound"
 
 function App() {
   return (
-    <div className=" bg-primary min-h-screen w-screen font-sometypeMono flex flex-col items-center gap-y-2 text-navtext">
+    <div className=" bg-primary min-h-screen w-screen font-sometypeMono flex flex-col items-center gap-y-2 text-navtext pb-5">
       <Header />
 
       <Routes>
