@@ -3,6 +3,7 @@ import Header from "./components/Header"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
 import SignOutAndUsername from "./components/SignOutAndUsername"
+import NotFound from "./components/NotFound"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )
