@@ -9,7 +9,6 @@ export function TaskContextProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      // If the user is logged in, user will be truthy; otherwise, it will be falsy.
       setIsAuthenticated(!!user);
     });
 
@@ -20,7 +19,7 @@ export function TaskContextProvider({ children }) {
     const fetchData = async () => {
       try {
         if (isAuthenticated) {
-          const snapshot = await db.collection('tasks').get();
+          const snapshot = await db.collection('tasks').where('userId', '==', auth.currentUser.uid).get();
           const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
           setTasks(data);
         } else {
@@ -41,7 +40,13 @@ export function TaskContextProvider({ children }) {
     const updateData = async () => {
       try {
         if (isAuthenticated) {
-          await db.collection('tasks').set(tasks);
+          // Use batched writes to update tasks in Firestore
+          const batch = db.batch();
+          tasks.forEach((task) => {
+            const taskRef = db.collection('tasks').doc(task.id);
+            batch.set(taskRef, task);
+          });
+          await batch.commit();
         } else {
           localStorage.setItem('tasks', JSON.stringify(tasks));
         }
@@ -54,13 +59,13 @@ export function TaskContextProvider({ children }) {
   }, [isAuthenticated, tasks]);
 
   const removeTask = (id) => {
-    setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
   const values = {
     tasks,
     setTasks,
-    removeTask
+    removeTask,
   };
 
   return (
