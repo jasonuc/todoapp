@@ -9,7 +9,7 @@ function SignOutAndUsername() {
 
   const handleSignOut = async () => {
     await signOut(auth)
-    navigate('/')
+    navigate(-1)
   }
 
   onAuthStateChanged(auth, (user) => {

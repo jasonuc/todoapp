@@ -15,7 +15,7 @@ function App() {
       </Routes>
 
       <Routes>
-        <Route index element={<Login />} />
+        <Route index path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
