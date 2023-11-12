@@ -4,20 +4,16 @@ const NoTasks = () => {
   return (
     <TypeAnimation 
       sequence={[
-        '😬 this is awkward',
+        '😴 you have no tasks to complete',
         1000, 
-        '😬 this is awkward.',
+        '😴 you have no tasks to complete.',
         1000,
-        '😬 this is awkward..',
+        '😴 you have no tasks to complete..',
         1000,
-        '😬 this is awkward...',
+        '😴 you have no tasks to complete...',
         1000
       ]}
-      wrapper="p"
-      speed={80}
-      deletionSpeed={95}
-      repeat={Infinity}
-      cursor={false}
+      wrapper="p" speed={80} deletionSpeed={95} repeat={Infinity} cursor={false}
       className='text-third italic inline-block'
     />
   );
