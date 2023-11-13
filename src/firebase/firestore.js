@@ -12,14 +12,10 @@ export async function addTask({ uid, id, task, datetime }) {
 export function getTasks(uid, callback) {
   const q = query(TASKSREF, where("uid", "==", uid))
   return onSnapshot(q, (snapshot) => {
-    let allTasks = []
-    snapshot.docs.forEach((doc) => {
-      allTasks.push({
-        ...doc.data(),
-        id: doc.id
-      })
-    })
-    callback(allTasks)
+    callback(snapshot.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
+    })))
   })
 }
 
