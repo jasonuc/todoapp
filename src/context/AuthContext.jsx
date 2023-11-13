@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { getTasks } from "../firebase/firestore";
 
 export const AuthContext = createContext(null)
 
@@ -14,6 +15,7 @@ export function AuthProvider({ children }) {
                 user: user,
                 uid: user.uid,
                 isAnonymous: user.isAnonymous,
+                tasks: getTasks(user.uid)
             })
         })
     }, [])

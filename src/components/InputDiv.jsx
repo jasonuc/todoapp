@@ -1,5 +1,4 @@
 import { useContext, useRef, useState } from "react"
-import { TaskContext } from "../context/TaskContext"
 import { getDateTime } from "../utilities/GetDateAndTime"
 import { makeId } from '../utilities/GenerateId'
 import { AiOutlinePlus } from 'react-icons/ai'
@@ -8,8 +7,7 @@ import { addTask } from "../firebase/firestore"
 
 function InputDiv() {
 
-  const [ task, setTask ] = useState(null)
-  const { setTasks } = useContext(TaskContext)
+  const [ task, setTask ] = useState()
   const { uid } = useContext(AuthContext)
   const taskInputRef = useRef()
 
@@ -23,17 +21,9 @@ function InputDiv() {
   }
 
   const AddTask = () => {
-    if (taskInputRef.current.value) {
-      setTasks(prev => [
-        task,
-        ...prev
-      ])
-      addTask(task)
-      taskInputRef.current.value = ""
-      setTask(null)
-    } else {
-      console.warn("Type in a task before pressing the add button.")
-    }
+    addTask(task)
+    setTask(null)
+    taskInputRef.current.value = ""
   }
 
   return (

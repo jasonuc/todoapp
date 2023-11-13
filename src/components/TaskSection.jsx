@@ -1,12 +1,17 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import Task from './Task'
-import { TaskContext } from '../context/TaskContext'
 import NoTasks from './NoTasks'
-
+import { AuthContext } from '../context/AuthContext'
+import { getTasks } from '../firebase/firestore'
 
 function TaskSection() {
+  const { uid } = useContext(AuthContext)
+  const [tasks, setTasks] = useState([])
 
-  const { tasks } = useContext(TaskContext)
+  useEffect(() => {
+    const unsubscribe = getTasks(uid, setTasks)
+    return () => unsubscribe()
+  }, [uid])
 
   return (
     <div className="mt-4 w-[90%] md:w-3/4 flex flex-col items-center gap-y-4 ">
