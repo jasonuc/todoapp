@@ -14,7 +14,6 @@ function SignOutAndUsername() {
 
   onAuthStateChanged(auth, (user) => {
     if (user.isAnonymous) {
-      // console.log(user.uid)
       setName("Anonymous")
     } else if (user.isAnonymous === false) {
       setName(user.displayName)

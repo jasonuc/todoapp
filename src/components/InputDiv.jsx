@@ -1,6 +1,5 @@
 import { useContext, useRef, useState } from "react"
 import { getDateTime } from "../utilities/GetDateAndTime"
-import { makeId } from '../utilities/GenerateId'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { AuthContext } from "../context/AuthContext"
 import { addTask } from "../firebase/firestore"
@@ -13,7 +12,6 @@ function InputDiv() {
 
   const handleChange = ({ target }) => {
     setTask({
-      id: makeId(),
       task: target.value,
       datetime: getDateTime(),
       uid: uid
