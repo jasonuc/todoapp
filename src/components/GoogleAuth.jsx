@@ -6,7 +6,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 
-function GoogleAuth() {
+function GoogleAuth({ hoverRotate }) {
 
     const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ function GoogleAuth() {
     }
 
     return (
-        <AuthButton handleAuth={handleGoogleAuth}>
+        <AuthButton handleAuth={handleGoogleAuth} hoverRotate={hoverRotate}>
             <FcGoogle size={40} />
             Sign In With Google
         </AuthButton>

@@ -4,7 +4,7 @@ import AuthButton from './AuthButton'
 import { signInAnonymously } from "firebase/auth"
 import { auth } from "../firebase/firebase"
 
-function GuestAuth() {
+function GuestAuth({ hoverRotate }) {
 
     const navigate = useNavigate()
 
@@ -18,7 +18,7 @@ function GuestAuth() {
     }
 
     return (
-        <AuthButton handleAuth={handleGuestAuth}>
+        <AuthButton handleAuth={handleGuestAuth} hoverRotate={hoverRotate}>
             <BiUserCircle size={40} />
             Sign In As Guest
         </AuthButton>
