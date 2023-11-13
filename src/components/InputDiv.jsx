@@ -3,27 +3,32 @@ import { TaskContext } from "../context/TaskContext"
 import { getDateTime } from "../utilities/GetDateAndTime"
 import { makeId } from '../utilities/GenerateId'
 import { AiOutlinePlus } from 'react-icons/ai'
+import { AuthContext } from "../context/AuthContext"
+import { addTask } from "../firebase/firestore"
 
 function InputDiv() {
 
   const [ task, setTask ] = useState(null)
   const { setTasks } = useContext(TaskContext)
+  const { uid } = useContext(AuthContext)
   const taskInputRef = useRef()
 
   const handleChange = ({ target }) => {
     setTask({
       id: makeId(),
       task: target.value,
-      datetime: getDateTime()
+      datetime: getDateTime(),
+      uid: uid
     })
   }
 
   const AddTask = () => {
     if (taskInputRef.current.value) {
-      setTasks(prev => ([
+      setTasks(prev => [
         task,
         ...prev
-      ]))
+      ])
+      addTask(task)
       taskInputRef.current.value = ""
       setTask(null)
     } else {
