@@ -9,8 +9,19 @@ function TaskSection() {
   const [tasks, setTasks] = useState([])
 
   useEffect(() => {
-    const unsubscribe = getTasks(uid, setTasks)
-    return () => unsubscribe()
+    let unsubscribeTasks = null;
+
+    if (uid) {
+      unsubscribeTasks = getTasks(uid, (fetchedTasks) => {
+        setTasks(fetchedTasks);
+      });
+    }
+
+    return () => {
+      if (unsubscribeTasks) {
+        unsubscribeTasks();
+      }
+    };
   }, [uid])
 
   return (
@@ -20,4 +31,4 @@ function TaskSection() {
   )
 }
 
-export default TaskSection
+export default TaskSection;

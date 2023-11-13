@@ -7,23 +7,41 @@ export const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
 
-    const [ userData, setUserData ] = useState({})
+    const [userData, setUserData] = useState({})
 
     useEffect(() => {
+        let unsubscribeTasks = null;
+
         onAuthStateChanged(auth, (user) => {
-            setUserData({
-                user: user,
-                uid: user.uid,
-                isAnonymous: user.isAnonymous,
-                tasks: getTasks(user.uid)
-            })
-        })
-    }, [])
+            if (unsubscribeTasks) {
+                // Unsubscribe from previous tasks listener
+                unsubscribeTasks();
+            }
+
+            if (user) {
+                unsubscribeTasks = getTasks(user.uid, (tasks) => {
+                    setUserData({
+                        user: user,
+                        uid: user.uid,
+                        isAnonymous: user.isAnonymous,
+                        tasks: tasks
+                    });
+                });
+            } else {
+                setUserData({});
+            }
+        });
+
+        return () => {
+            if (unsubscribeTasks) {
+                unsubscribeTasks();
+            }
+        };
+    }, []);
 
     return (
         <AuthContext.Provider value={userData}>
-            { children }
+            {children}
         </AuthContext.Provider>
     )
-
 }
