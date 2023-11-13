@@ -9,7 +9,10 @@ export async function addTask({ uid, id, task, datetime }) {
   await addDoc(TASKSREF, docData);
 }
 
+// export function getTasks(uid, callback) {
+//   const q = query(TASKSREF, where("uid", "==", uid))
 export function getTasks(uid, callback) {
+  console.log("UID:", uid); // Add this line
   const q = query(TASKSREF, where("uid", "==", uid))
   return onSnapshot(q, (snapshot) => {
     let allTasks = []
