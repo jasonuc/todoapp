@@ -14,7 +14,6 @@ export function AuthProvider({ children }) {
 
         onAuthStateChanged(auth, (user) => {
             if (unsubscribeTasks) {
-                // Unsubscribe from previous tasks listener
                 unsubscribeTasks();
             }
 
